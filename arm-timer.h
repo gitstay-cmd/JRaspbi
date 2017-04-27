@@ -1,12 +1,12 @@
 
-#include "rpi-interrupts.h"
 #ifndef ARM_TIMER_H
 #define ARM_TIMER_H
 #include <stdint.h>
-#include "rpi-gpio.h"
-#include "rpi-base.h"
+#include "gpio.h"
+#include "bcm2835.h"
+#include "interrupts.h"
 
-#define RPI_ARMTIMER_BASE				( PERIPHERAL_BASE + 0xB400 )
+#define RPI_ARMTIMER_BASE				( Peripheral_Base + 0xB400 )
 
 #define RPI_ARMTIMER_CTRL_23BIT			(1 << 1 )
 

@@ -1,6 +1,7 @@
 #include<sys/times.h>
 #include<sys/stat.h>
-#include "rpi-aux.h"
+#include "uart.h"
+#include "fb.h"
 #include<errno.h>
 #undef errno
 extern int errno;
@@ -116,15 +117,12 @@ int wait(int *status){
 }
 
 void outbyte(char b){
-	RPI_AuxMiniUartWrite(b);
+	console_drawc((int)b);
 }
 
 /*Write to a file. libc subroutines will use this system routine for output to all files, including stdout-so if you need to generate any output, for example to a serial port for debugging, you should make your minimal write capable of doing this. The following minimal implementation is an incomplete example; it relies on a outbyte subroutine*/
 
 int _write(int file, char *ptr, int len){
-	int todo;
-	for(todo = 0; todo < len; todo++){
-		outbyte(*ptr++);
-	}
+	console_puts(ptr);
 	return len;
 }

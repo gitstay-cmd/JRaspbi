@@ -1,9 +1,9 @@
 #include<stdint.h>
-#include "rpi-gpio.h"
-#include "rpi-mailbox.h"
+#include "gpio.h"
+#include "mailbox.h"
 
 /*Mailbox 0 mapped to it's base address */
-static mailbox_t* rpiMailbox0 = (mailbox_t*)RPI_MAILBOX0_BASE;
+static mailbox* rpiMailbox0 = (mailbox*)Rpi_MAILBOX0_BASE;
 
 void RPI_Mailbox0Write(mailbox0_channel_t channel, int value){
 	/* Add the channel number into the lower 4 bits */

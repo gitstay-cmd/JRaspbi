@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "rpi-mailbox.h"
+#include "mailbox.h"
 #include "rpi-mailbox-interface.h"
-#include "timer.h"
+#include "systimer.h"
 
 /* Make sure the property tag buffer is aligned to a 16-byte boundary because we only have 28-bits available in the property interface protocal to pass the address of the buffer to the VC. */
 static int pt[8192] __attribute__((aligned(16)));
@@ -138,9 +138,9 @@ int RPI_PropertyProcess(void){
 		for(i = 0; i < (pt[PT_OSIZE] >> 2); i++)
 			printf( "Request: %3d %8.8X\r\n", i, pt[i]);
 	#endif
-	RPI_Mailbox0Write(MB0_TAGS_ARM_TO_VC, (unsigned int)pt);
+	Rpi_MailboxWrite(MB0_TAGS_ARM_TO_VC, (unsigned int)pt);
 	
-	result = RPI_Mailbox0Read(MB0_TAGS_ARM_TO_VC);
+	result = Rpi_MailboxRead(MB0_TAGS_ARM_TO_VC);
 	#if( PRINT_PROP_DEBUG == 1)
 		for(i = 0; i < (pt[PT_OSIZE] >> 2); i++)
 			printf( "Response: %3d %8.8X\r\n", i, pt[i]);
