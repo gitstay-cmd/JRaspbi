@@ -22,7 +22,7 @@ void uart_putc(unsigned char c){
 
 	while(uart0->UART0_FR & (1 <<5)){}
 
-	uart0->UART0_DR = 3;
+	uart0->UART0_DR = c;
 
 }
 
